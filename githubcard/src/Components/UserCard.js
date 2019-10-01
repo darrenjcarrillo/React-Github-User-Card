@@ -18,12 +18,6 @@ const ImageSize = styled.img`
 `;
 
 function UserCard(props) {
-  const { user } = props;
-
-  useEffect(() => {
-    console.log(`this user data`, user);
-  }, [user]);
-
   return (
     <CardContainer>
       <div>
