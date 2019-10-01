@@ -7,30 +7,46 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      UserData: [],
-      FollowersData: []
+      user: {},
+      followersData: []
     };
   }
 
-  fetchUser = e => {
-    e.preventDefault();
+  // componentDidMount() {
+  //   this.fetchUser()
+  //     .then(user => this.setState({ userData: user }))
+  //     .catch(err => console.log(`Error User`, err));
+  // }
+
+  componentDidMount() {
     axios
       .get(`https://api.github.com/users/darrenjcarrillo`)
       .then(res => {
-        // console.log(`this is data`, res);
+        console.log(`this is data`, res);
         this.setState({
-          UserData: res.data
+          user: res.data
         });
       })
       .catch(err => console.log(err));
-  };
+  }
+
+  // fetchUser = e => {
+  //   axios
+  //     .get("https://api.github.com/users/darrenjcarrillo")
+  //     .then(res => {
+  //       // console.log(`this is data`, res);
+  //       this.setState({
+  //         followersData: res.data
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
       <div className="App">
         <h1>GitHub User</h1>
-        {console.log(this.state.UserData)}
-        <UserCard UserData={this.state.UserData} />
+        <UserCard key={this.state.user} user={this.state.user} />
       </div>
     );
   }
